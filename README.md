@@ -1,2 +1,2 @@
 # CRUD_PHP_MVC
-crud implementando bootstrap, jquery y php
+crud  creado con la metodologia MVC e implementando bootstrap, jquery y php
