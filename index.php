@@ -1,11 +1,35 @@
 <?php 
-	
-	define( 'DS', DIRECTORY_SEPARATOR);
-	define( 'ROOT' , realpath(dirname(__FILE__)) . DS);
+require "Config.php";
 
-	require "Config/Autoload.php";
-	Config\Autoload::run();
-	require "Views/template.php";
-	Config\Enrutador::run(new Config\Request());
+$url = !isset($_GET["url"])? "Usuario/usuario":$_GET["url"]; 
+$url = explode("/", $url);
+
+
+$controlador = $url[0];
+
+$metodo = $url[1];
+
+$rutaControlador= "Controllers/".$controlador.".php";
+
+if (file_exists($rutaControlador)) {
 	
+	require $rutaControlador;
+
+	$controller = new $controlador; 
+
+	if (method_exists($controller, $metodo)) {
+		
+		$controller->{$metodo}();
+	}else{
+		echo "NO EXISTE METODO";
+	}
+
+	}else{
+		echo "NO EXISTE CONTROLADOR";
+	}
+
+ 
  ?>
+
+
+
